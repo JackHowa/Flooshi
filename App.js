@@ -8,8 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
-import Timer from './src/components/Timer';
-import TextIndicator from './src/components/TextIndicator';
+import OptionBar from './src/components/OptionBar';
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Remote debugger is in a background tab which may cause apps to perform slowly',
 ])
@@ -53,13 +52,13 @@ export default class App extends Component {
 						]
 					}
 				/>
-
-				
-					<TextIndicator />
+					<OptionBar />
 				</SafeAreaView>
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
 	safeArea: {
