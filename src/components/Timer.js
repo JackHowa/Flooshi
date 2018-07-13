@@ -1,11 +1,7 @@
 import React from 'react';
-import { Text, StyleSheet, Dimensions } from 'react-native';
+import { Text, StyleSheet, Dimensions, View } from 'react-native';
 
-const Timer = (props) => (
-	<Text style={styles.textStyle}>
-		{props.timeRemaining}
-	</Text>
-);
+const Timer = (props) => <View style={{backgroundColor: "black", opacity: props.timeRemaining}} />;
 
 const { width, height } = Dimensions.get('window');
 
