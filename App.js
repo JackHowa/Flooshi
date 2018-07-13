@@ -7,9 +7,9 @@ import {
 	YellowBox
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import timer from 'react-native-timer';
 
 import Timer from './src/components/Timer';
+import TextIndicator from './src/components/TextIndicator';
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Remote debugger is in a background tab which may cause apps to perform slowly',
 ])
@@ -17,7 +17,7 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTIm
 export default class App extends Component {
 	constructor() {
 		super();
-		this.state = {timeRemaining: 60}
+		this.state = {timeRemaining: 100}
 	}
 
   componentDidMount() {
@@ -27,21 +27,36 @@ export default class App extends Component {
   tick = () => {
     this.setState({
       timeRemaining: this.state.timeRemaining - 1
-    });
+		});
+		console.log(this.state.timeRemaining)
   }
 
   render() {
     return (
-			<SafeAreaView forceInset={{ bottom: 'never' }} style={styles.safeArea}>
-				<View style={styles.container}>
-					<View style={[styles.subContainer, styles.primaryColor]}>
-						<Timer timeRemaining={this.state.timeRemaining} />
-					</View>
-					<View style={[styles.subContainer, styles.mainBackgroundColor]}>
-						<Text>Yo</Text>
-					</View>
-				</View>
-			</SafeAreaView>
+				<SafeAreaView 
+					style={
+						[
+							styles.safeArea,
+						]
+					}
+				>
+				<View 
+					style={
+						[
+							{ 
+								opacity: this.state.timeRemaining / 100,
+							}, 
+						styles.primaryColor,
+						{
+							flex: 1,
+						}
+						]
+					}
+				/>
+
+				
+					<TextIndicator />
+				</SafeAreaView>
     );
   }
 }
@@ -49,7 +64,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
 	safeArea: {
 		flex: 1,
-		backgroundColor: '#5856d6'
+		backgroundColor: '#fafafa',
 	},
   container: {
 		flex: 1,
@@ -57,7 +72,8 @@ const styles = StyleSheet.create({
 	subContainer: {
 		flex: 1, 
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+
 	},
 	primaryColor: {
 		backgroundColor: "#5856d6",
