@@ -1,7 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const OptionBar = () => (<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}><Icon name="ios-play" color="black" size={50} /></View>);
+const OptionBar = (props) => (
+	<View 
+		style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
+		>
+		<TouchableOpacity onPress={props.onPressFunction}>
+			<Icon 
+			name={props.playing ? "ios-pause" : "ios-play"} color="black" size={115} />
+		</TouchableOpacity>
+	</View>
+);
 
 export default OptionBar;

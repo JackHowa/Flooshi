@@ -16,17 +16,35 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTIm
 export default class App extends Component {
 	constructor() {
 		super();
-		this.state = {timeRemaining: 100}
+		this.state = {
+			timeRemaining: this.getTimerAmount(),
+			playing: false
+		}
 	}
 
   componentDidMount() {
     setInterval(this.tick, 1000);
-  }
+	}
+
+	getTimerAmount = () => {
+		return 100;
+	}
+	
+	toggleStatus = () => {
+		this.setState((prevState, props) => {
+			return {
+				timeRemaining: this.getTimerAmount(), 
+				playing: !prevState.playing
+			};
+		});
+	}
 
   tick = () => {
-    this.setState({
-      timeRemaining: this.state.timeRemaining - 1
-		});
+		if (this.state.playing === true) {
+			this.setState(prevState => {
+				return {timeRemaining: prevState.timeRemaining - 1};
+			})
+		}
 		console.log(this.state.timeRemaining)
   }
 
@@ -47,12 +65,15 @@ export default class App extends Component {
 							}, 
 						styles.primaryColor,
 						{
-							flex: 1,
+							flex: 4,
 						}
 						]
 					}
 				/>
-					<OptionBar />
+					<OptionBar 
+						onPressFunction={this.toggleStatus} 
+						playing={this.state.playing} 
+					/>
 				</SafeAreaView>
     );
   }
